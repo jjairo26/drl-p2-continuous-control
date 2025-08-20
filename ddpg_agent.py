@@ -13,12 +13,12 @@ class DDPGAgent:
     def __init__(self, state_size, action_size, hidden_size_1, hidden_size_2,
                  buffer_size, batch_size, gamma,
                  tau, lr_actor, lr_critic, weight_decay, random_seed):
-        self.actor = Actor(state_size, action_size, hidden_size_1, hidden_size_2)
-        self.critic = Critic(state_size, action_size, hidden_size_1, hidden_size_2)
+        self.actor = Actor(state_size, action_size, hidden_size_1, hidden_size_2, random_seed)
+        self.critic = Critic(state_size, action_size, hidden_size_1, hidden_size_2, random_seed)
 
-        self.actor_target = Actor(state_size, action_size, hidden_size_1, hidden_size_2)
+        self.actor_target = Actor(state_size, action_size, hidden_size_1, hidden_size_2, random_seed)
         self.critic_target = Critic(state_size, action_size, hidden_size_1,
-                                    hidden_size_2)
+                                    hidden_size_2, random_seed)
 
         self.buffer_size = buffer_size
         self.batch_size = batch_size
@@ -32,20 +32,20 @@ class DDPGAgent:
 
 
         # Actor Network (w/ Target Network)
-        self.actor_local = Actor(state_size, action_size, random_seed).to(device)
-        self.actor_target = Actor(state_size, action_size, random_seed).to(device)
+        self.actor_local = Actor(state_size, action_size, hidden_size_1, hidden_size_2, random_seed).to(device)
+        self.actor_target = Actor(state_size, action_size, hidden_size_1, hidden_size_2, random_seed).to(device)
         self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=lr_actor)
 
         # Critic Network (w/ Target Network)
-        self.critic_local = Critic(state_size, action_size, random_seed).to(device)
-        self.critic_target = Critic(state_size, action_size, random_seed).to(device)
+        self.critic_local = Critic(state_size, action_size, hidden_size_1, hidden_size_2, random_seed).to(device)
+        self.critic_target = Critic(state_size, action_size, hidden_size_1, hidden_size_2, random_seed).to(device)
         self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=lr_critic, weight_decay=weight_decay)
 
         # Noise process
         self.noise = OUNoise(action_size, random_seed)
 
         # Replay memory
-        self.memory = ReplayBuffer(action_size, buffer_size, batch_size, random_seed)
+        self.memory = ReplayBuffer(buffer_size, batch_size, random_seed)
 
 
     def act(self, state, add_noise=True):

@@ -6,9 +6,11 @@ import torch
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class ReplayBuffer:
-    def __init__(self, buffer_size=10000, batch_size=64):
+    def __init__(self, buffer_size=10000, batch_size=64, random_seed=None):
         self.buffer = deque(maxlen=buffer_size)
         self.batch_size = batch_size
+        self.random_seed = random_seed
+        random.seed(random_seed)
 
     def add(self, state, action, reward, next_state, done):
         self.buffer.append((state, action, reward, next_state, done))

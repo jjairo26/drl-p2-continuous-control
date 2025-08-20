@@ -9,8 +9,9 @@ def hidden_init(layer):
     return (-lim, lim)
 
 class Actor(nn.Module):
-    def __init__(self, state_size, action_size, hidden_size_1, hidden_size_2):
+    def __init__(self, state_size, action_size, hidden_size_1, hidden_size_2, random_seed):
         super().__init__()
+        self.seed = torch.manual_seed(random_seed)
         self.fc1 = nn.Linear(state_size, hidden_size_1)
         self.fc2 = nn.Linear(hidden_size_1, hidden_size_2)
         self.fc3 = nn.Linear(hidden_size_2, action_size)
@@ -31,10 +32,11 @@ class Actor(nn.Module):
         self.fc3.weight.data.uniform_(-3e-3, 3e-3)
 
 class Critic(nn.Module):
-    def __init__(self, state_size, action_size, hidden_state_size, hidden_action_size):
+    def __init__(self, state_size, action_size, hidden_state_size, hidden_action_size, random_seed):
         # This network has the states as an input in the input layer to determine state features
         # The actions come as an input starting from the first hidden layer
         super().__init__()
+        self.seed = torch.manual_seed(random_seed)
         self.fc1 = nn.Linear(state_size, hidden_state_size)
         self.fc2 = nn.Linear(hidden_state_size + action_size, hidden_action_size)
         self.fc3 = nn.Linear(hidden_action_size, 1)
