@@ -19,7 +19,7 @@ class ReplayBuffer:
         batch = random.sample(self.buffer, self.batch_size)
 
         states = torch.from_numpy(np.vstack([b[0] for b in batch])).float().to(device)
-        actions = torch.from_numpy(np.vstack([b[1] for b in batch])).long().to(device)
+        actions = torch.from_numpy(np.vstack([b[1] for b in batch])).float().to(device)
         rewards = torch.from_numpy(np.vstack([b[2] for b in batch])).float().to(device)
         next_states = torch.from_numpy(np.vstack([b[3] for b in batch])).float().to(device)
         dones = torch.from_numpy(np.vstack([b[4] for b in batch]).astype(np.uint8)).float().to(device) # True/False to 1/0, then to float
