@@ -14,6 +14,8 @@ The Deep Deterministic Policy Gradient (DDPG) algorithm was implemented to solve
 	 - Update the actor using the sampled policy gradient.
 	 - Soft-update the target networks using the parameter $\tau$.
 
+This implementation was adapted from the [Udacity DRL implementation](https://github.com/udacity/deep-reinforcement-learning).
+
 ## Model Architecture
 
 Both the actor and critic networks are fully connected feedforward neural networks:
