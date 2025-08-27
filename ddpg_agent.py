@@ -53,9 +53,9 @@ class DDPGAgent:
     def act(self, state, add_noise=True):
         """Returns actions for given state as per current policy."""
         state = torch.from_numpy(state).float().unsqueeze(0).to(device)
-
+ 
         self.actor_local.eval()
-        with torch.no_grad():
+        with torch.no_grad(): 
             action = self.actor_local(state).cpu().data.numpy().squeeze(0)
         self.actor_local.train()
 
@@ -67,10 +67,12 @@ class DDPGAgent:
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experience in replay memory
         self.memory.add(state, action, reward, next_state, done)
-        
+
+        # Learn every self.learn_every steps
         self.t_step = (self.t_step + 1) % self.learn_every
 
         if self.t_step == 0:
+            # Update the model num_training times
             for i in range(0, self.num_training):
                 if len(self.memory) > self.batch_size:
                     experiences = self.memory.sample()
