@@ -119,7 +119,7 @@ class DDPGAgent:
 class OUNoise:
     """Ornstein-Uhlenbeck process."""
 
-    def __init__(self, size, seed, mu=0., theta=0.15, sigma=0.3):
+    def __init__(self, size, seed, mu=0., theta=0.15, sigma=0.2):
         """Initialize parameters and noise process."""
         self.mu = mu * np.ones(size) # long-term mean
         self.theta = theta # rate of mean reversion (how fast the process returns to the mean)

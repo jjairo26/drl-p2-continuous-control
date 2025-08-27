@@ -37,28 +37,29 @@ The following hyperparameters were used for training:
 | Hyperparameter | Value         | Description                                  |
 |---------------|---------------|----------------------------------------------|
 | BUFFER_SIZE   | 100000        | Replay buffer size                           |
-| BATCH_SIZE    | 128           | Minibatch size for learning                  |
+| BATCH_SIZE    | 256           | Minibatch size for learning                  |
 | GAMMA         | 0.99          | Discount factor for future rewards           |
 | TAU           | 1e-3          | Soft update parameter for target networks    |
-| LR_ACTOR      | 2e-5          | Learning rate for actor optimizer            |
+| LR_ACTOR      | 3e-5          | Learning rate for actor optimizer            |
 | LR_CRITIC     | 2e-4          | Learning rate for critic optimizer           |
 | HIDDEN_SIZE_1 | 256           | First hidden layer size                      |
 | HIDDEN_SIZE_2 | 256           | Second hidden layer size                     |
 | WEIGHT_DECAY  | 0.0           | L2 weight decay for critic                   |
-| LEARN_EVERY   | 20            | Steps between learning updates               |
+| LEARN_EVERY   | 40            | Steps between learning updates               |
 | NUM_TRAINING  | 20            | Number of learning updates per step          |
 | n_episodes    | 800           | Number of training episodes                  |
 | t_max         | 900           | Max timesteps per episode                    |
 
 ## Results
 
-The following plot shows the episode scores and mean scores over time. The agent gradually improves, reaching a plateau as learning stabilizes. The trained model parameters are saved in `checkpoint_actor.pth` and `checkpoint_critic.pth`.
+The following plot shows the episode scores and mean scores over time. The agent gradually improves, reaching a plateau with a score higher than 30 as learning stabilizes. The trained model parameters are saved in `checkpoint_actor.pth` and `checkpoint_critic.pth`.
 
-![Training score plot](score_learning_results.png)
+![Training score plot](training_results.png)
 
 ## Ideas for Future Work
 
 Potential improvements include:
 - Tuning hyperparameters for faster and more stable learning.
 - Implementing alternative exploration strategies (e.g., parameter noise).
+- Explore different noise models like Gaussian noise.
 - Using prioritized experience replay.
