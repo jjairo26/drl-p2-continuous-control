@@ -50,6 +50,8 @@ The following hyperparameters were used for training:
 | n_episodes    | 800           | Number of training episodes                  |
 | t_max         | 900           | Max timesteps per episode                    |
 
+Additionally, an Ornstein-Uhlenbeck process was used as a noise model with the default parameters from the DDPG Paper (Lillicrap et al. 2016), i.e. θ = 0.15 and σ = 0.2. 
+
 ## Results
 
 The following plot shows the episode scores and mean scores over time. The agent gradually improves, reaching a plateau with a score higher than 30 as learning stabilizes. The trained model parameters are saved in `checkpoint_actor.pth` and `checkpoint_critic.pth`.
