@@ -41,7 +41,7 @@ The following hyperparameters were used for training:
 | GAMMA         | 0.99          | Discount factor for future rewards           |
 | TAU           | 1e-3          | Soft update parameter for target networks    |
 | LR_ACTOR      | 3e-5          | Learning rate for actor optimizer            |
-| LR_CRITIC     | 2e-4          | Learning rate for critic optimizer           |
+| LR_CRITIC     | 4e-4          | Learning rate for critic optimizer           |
 | HIDDEN_SIZE_1 | 256           | First hidden layer size                      |
 | HIDDEN_SIZE_2 | 256           | Second hidden layer size                     |
 | WEIGHT_DECAY  | 0.0           | L2 weight decay for critic                   |
